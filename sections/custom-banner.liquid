@@ -1,0 +1,252 @@
+<style>
+    .custom-banner {
+        width: {{ section.settings.custom_banner_width }};
+        height: {{ section.settings.custom_banner_height }};
+        background-color: {{ section.settings.custom_banner_background_color }};
+        color: {{ section.settings.custom_banner_text_color }};
+        padding: {{ section.settings.custom_banner_padding }};
+    }
+    .custom-banner-heading {
+        text-align: {{ section.settings.custom_banner_heading_align }};
+        font-size: {{ section.settings.custom_banner_font_size }};
+        font-weight: {{ section.settings.custom_banner_font_weight }};
+        font-style: {{ section.settings.custom_banner_font_style }};
+        font-size-adjust: {{ section.settings.custom_banner_font_size_adjust }};
+        text-transform: {{ section.settings.custom_banner_text_transform }};
+        text-decoration: {{ section.settings.custom_banner_text_decoration }};
+        text-shadow: {{ section.settings.custom_banner_text_shadow }};
+        text-overflow: {{ section.settings.custom_banner_text_overflow }};
+        text-wrap: {{ section.settings.custom_banner_text_wrap }};
+        letter-spacing: {{ section.settings.custom_banner_letter_spacing }};
+        color: {{ section.settings.custom_banner_text_color }};
+    }
+    .custom-banner-subHeading{
+        text-align: {{ section.settings.custom_banner_text_align }};
+        font-size: {{ section.settings.custom_banner_subheading_font_size }};
+        font-weight: {{ section.settings.custom_banner_font_weight }};
+        font-style: {{ section.settings.custom_banner_font_style }};
+        font-size-adjust: {{ section.settings.custom_banner_font_size_adjust }};
+        text-transform: {{ section.settings.custom_banner_text_transform }};
+        text-decoration: {{ section.settings.custom_banner_text_decoration }};
+        text-shadow: {{ section.settings.custom_banner_text_shadow }};
+        text-overflow: {{ section.settings.custom_banner_text_overflow }};
+        text-wrap: {{ section.settings.custom_banner_text_wrap }};
+        letter-spacing: {{ section.settings.custom_banner_letter_spacing }};
+        color: {{ section.settings.custom_banner_subheading_color }};
+    }
+</style>
+
+<div class="container custom-banner">
+    <h2 class="custom-banner-heading">
+        {{ section.settings.custom_banner_heading }}
+    </h2>
+    <p class="custom-banner-subHeading" >{{ section.settings.custom_banner_text }}</p>
+</div>
+
+{% schema %}
+{
+    "name": "Custom Banner",
+    "settings": [
+        {
+            "type": "text",
+            "id": "custom_banner_heading",
+            "label": "Custom Banner Heading",
+            "default": "Custom Banner Heading",
+            "info": "Add your custom banner heading"
+        },
+        {
+            "type": "textarea",
+            "id": "custom_banner_text",
+            "label": "Custom Banner Text",
+            "default": "Add custom text here.",
+            "info": "Add your custom banner text"
+        },
+        {
+            "type": "header",
+            "content": "Banner Container Styles"
+        },
+        {
+            "type": "text",
+            "id": "custom_banner_width",
+            "label": "Banner Width",
+            "default": "100%",
+            "info": "e.g., 100%, 1200px"
+        },
+        {
+            "type": "text",
+            "id": "custom_banner_height",
+            "label": "Banner Height",
+            "default": "auto",
+            "info": "e.g., auto, 400px"
+        },
+        {
+            "type": "color",
+            "id": "custom_banner_background_color",
+            "label": "Background Color",
+            "default": "#f4f4f4"
+        },
+        {
+            "type": "color",
+            "id": "custom_banner_text_color",
+            "label": "Text Color",
+            "default": "#000000"
+        },
+        {
+            "type": "text",
+            "id": "custom_banner_padding",
+            "label": "Banner Padding",
+            "default": "40px 20px",
+            "info": "e.g., 20px, 10px 20px"
+        },
+        {
+            "type": "header",
+            "content": "Banner Heading Typography & Style"
+        },
+        {
+            "type": "select",
+            "id": "custom_banner_heading_align",
+            "label": "Heading Text Align",
+            "default": "center",
+            "options": [
+                { "value": "left", "label": "Left" },
+                { "value": "center", "label": "Center" },
+                { "value": "right", "label": "Right" },
+                { "value": "justify", "label": "Justify" }
+            ]
+        },
+        {
+            "type": "text",
+            "id": "custom_banner_font_size",
+            "label": "Heading Font Size",
+            "default": "32px",
+            "info": "e.g., 32px, 2.5rem"
+        },
+        {
+            "type": "select",
+            "id": "custom_banner_font_weight",
+            "label": "Heading Font Weight",
+            "default": "bold",
+            "options": [
+                { "value": "normal", "label": "Normal" },
+                { "value": "bold", "label": "Bold" },
+                { "value": "100", "label": "100 - Thin" },
+                { "value": "200", "label": "200 - Extra Light" },
+                { "value": "300", "label": "300 - Light" },
+                { "value": "400", "label": "400 - Normal" },
+                { "value": "500", "label": "500 - Medium" },
+                { "value": "600", "label": "600 - Semi Bold" },
+                { "value": "700", "label": "700 - Bold" },
+                { "value": "800", "label": "800 - Extra Bold" },
+                { "value": "900", "label": "900 - Black" }
+            ]
+        },
+        {
+            "type": "select",
+            "id": "custom_banner_font_style",
+            "label": "Heading Font Style",
+            "default": "normal",
+            "options": [
+                { "value": "normal", "label": "Normal" },
+                { "value": "italic", "label": "Italic" },
+                { "value": "oblique", "label": "Oblique" }
+            ]
+        },
+        {
+            "type": "text",
+            "id": "custom_banner_font_size_adjust",
+            "label": "Heading Font Size Adjust",
+            "default": "none",
+            "info": "e.g., none, 0.5"
+        },
+        {
+            "type": "select",
+            "id": "custom_banner_text_transform",
+            "label": "Heading Text Transform",
+            "default": "none",
+            "options": [
+                { "value": "none", "label": "None" },
+                { "value": "capitalize", "label": "Capitalize" },
+                { "value": "uppercase", "label": "Uppercase" },
+                { "value": "lowercase", "label": "Lowercase" }
+            ]
+        },
+        {
+            "type": "select",
+            "id": "custom_banner_text_decoration",
+            "label": "Heading Text Decoration",
+            "default": "none",
+            "options": [
+                { "value": "none", "label": "None" },
+                { "value": "underline", "label": "Underline" },
+                { "value": "overline", "label": "Overline" },
+                { "value": "line-through", "label": "Line-through" }
+            ]
+        },
+        {
+            "type": "text",
+            "id": "custom_banner_text_shadow",
+            "label": "Heading Text Shadow",
+            "default": "none",
+            "info": "e.g., none, 2px 2px 4px rgba(0,0,0,0.3)"
+        },
+        {
+            "type": "select",
+            "id": "custom_banner_text_overflow",
+            "label": "Heading Text Overflow",
+            "default": "clip",
+            "options": [
+                { "value": "clip", "label": "Clip" },
+                { "value": "ellipsis", "label": "Ellipsis" }
+            ]
+        },
+        {
+            "type": "select",
+            "id": "custom_banner_text_wrap",
+            "label": "Heading Text Wrap",
+            "default": "wrap",
+            "options": [
+                { "value": "wrap", "label": "Wrap" },
+                { "value": "nowrap", "label": "No Wrap" },
+                { "value": "balance", "label": "Balance" },
+                { "value": "pretty", "label": "Pretty" }
+            ]
+        },
+        {
+            "type": "text",
+            "id": "custom_banner_letter_spacing",
+            "label": "Heading Letter/Word Spacing",
+            "default": "normal",
+            "info": "e.g., normal, 2px, 0.1em"
+        },
+        {
+            "type": "text",
+            "id": "custom_banner_subheading_font_size",
+            "label": "Subheading Font Size",
+            "default": "18px",
+            "info": "e.g., 18px, 1.5rem"
+        },
+        {
+            "type":"color",
+            "id":"custom_banner_subheading_color",
+            "label":"Subheading Color",
+            "default":"#000000"
+        },
+        {
+            "type":"select",
+            "id":"custom_banner_text_align",
+            "label":"Text Align",
+            "default":"center",
+            "options":[
+                {"value":"left", "label":"Left"},
+                {"value":"center", "label":"Center"},
+                {"value":"right", "label":"Right"}
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Custom Banner"
+        }
+    ]
+}
+{% endschema %}

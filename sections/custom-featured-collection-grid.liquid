@@ -1,0 +1,150 @@
+{% style %}
+.featured_collection{
+height:auto;
+width:100vw;
+display: flex;
+justify-content: center;
+align-items: center;
+background-color: {{section.settings.bg_color}};
+flex-direction: column;
+}
+
+.heading_color{
+color: {{section.settings.heading_color}};
+font-weight: {{section.settings.heading_weight}};
+font-size: {{section.settings.heading_size}};
+}
+.collection-container{
+height:auto;
+display: grid;
+gap: 10px;
+grid-template-columns: {{section.settings.grid_style}};
+}
+.featured_collection_grid{
+height: fit-content;
+display:flex;
+flex-direction: column;
+}
+.featured_collection_grid_view_all{
+height: 180px;
+display:flex;
+flex-direction: column;
+width:100%;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+a{
+text-decoration: none !important;
+color:black !important;
+width:fit-content;
+height:fit-content;
+}
+a:hover{
+text-decoration: none !important;
+color:black !important;
+transform: scale(1.05);
+transition-duration: 0.2s;
+
+}
+.product_image{
+width: 100%;
+height:fit-content;
+}
+
+
+{% endstyle %}
+<div class=" featured_collection">
+    <h2 class="heading_color">{{section.settings.my_collection.title}}</h2>
+    <div class="page-width collection-container">
+        {%for product in section.settings.my_collection.products limit:5%}
+        <a href="{{product.url}}">
+            <div class="featured_collection_grid">
+                <div class="product_image">
+                    <img width="100%" height="" src="{{product.featured_image|image_url:width:300 }}"
+                        alt="{{product.title}}">
+                </div>
+                <div class="product_name">
+                    {{product.title}}
+                </div>
+                <div class="product_price">
+                    {{product.price|money}}
+                </div>
+            </div>
+        </a>
+        {%endfor%}
+        <a href="{{section.settings.my_collection.url}}">
+            <div class="featured_collection_grid_view_all">
+                <h2>View all products</h2>
+            </div>
+        </a>
+    </div>
+</div>
+
+{% schema %}
+{
+"name":"Custom Collection",
+"settings": [
+{
+"type": "collection",
+"id": "my_collection",
+"label":"Custom Collection"
+},
+{
+"type": "color",
+"id": "bg_color",
+"label":"Background Color",
+"default":"#fff"
+},
+{
+"type": "select",
+"id": "grid_style",
+"label":"Grid Style",
+"options": [
+{
+"value": "1fr 1fr 1fr 1fr",
+"label": "4 Column"
+},
+{
+"value": "1fr 1fr 1fr",
+"label": "3 Column"
+},
+{
+"value": "1fr 1fr",
+"label": "2 Column"
+},
+{
+"value": "1fr",
+"label": "1 Column"
+}
+]
+},
+{
+"type":"color",
+"id":"heading_color",
+"label":"Heading Color",
+"default":"#000000"
+}
+,
+{
+"type":"text",
+"id":"heading_weight",
+"label":"Heading Weight",
+"default":"bold"
+},
+{
+"type":"text",
+"id":"heading_size",
+"label":"Heading Size",
+"default":"32px"
+}
+]
+,
+"presets": [
+{
+"name":"Custom Collection"
+}
+]
+}
+
+{% endschema %}

@@ -1,0 +1,95 @@
+<div style="display: flex; flex-wrap: wrap; gap: 40px; padding: 40px; max-width: 1200px; margin: 0 auto;">
+  <div style="flex: 1; min-width: 300px;">
+    <img src="{{ product.featured_image | image_url: width: 600 }}" width="100%" height="auto"
+      style=" border-radius: 8px;" alt="{{ product.title | escape }}">
+  </div>
+
+  <div style="flex: 1; min-width: 300px; display: flex; flex-direction: column; justify-content: center;">
+    <h1 style="margin-top: 0; font-family: sans-serif;">{{ product.title }}</h1>
+    <p style="font-size: 24px; color: #333; margin-bottom: 30px;">{{ product.price | money }}</p>
+    {%if product.metafields.custom.material_type != blank%}
+    <div>
+      <strong>Material</strong>{{product.metafields.custom.material_type}}
+    </div>
+    {% endif %}
+    {% form 'product', product , id:"add-to-cart-form" %}
+    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+    <button type="submit" id="add-to-cart-button"
+      style="padding: 15px 30px; background-color: var(--brand-primary); color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold; width: 100%; max-width: 300px;">
+      Add to cart
+    </button>
+    {% endform %}
+  </div>
+</div>
+
+{% schema %}
+{
+"name": "Custom Product Details",
+"settings": [],
+"presets": [
+{
+"name": "Custom Product Details"
+}
+]
+}
+{% endschema %}
+<script>
+  document.getElementById("add-to-cart-form").addEventListener("submit", async function (e) {
+    e.preventDefault();
+    let form = this
+    let submitButton = document.getElementById("add-to-cart-button")
+    let originalText = submitButton.innerText
+
+    submitButton.innerText = "Adding to Cart..."
+    submitButton.style.opacity = '0.7'
+
+    let formData = new FormData(form)
+
+
+    try {
+      const response = await fetch('/cart/add.js', {
+        method: "POST",
+        body: formData
+      })
+      if (!response.ok) {
+        throw new Error("Network response was not ok ")
+
+      }
+      console.log("added to cart")
+      const cartResponse = await fetch('/cart.js');
+      const cartData = await cartResponse.json();
+
+      // 3. Update the Header UI dynamically
+      const cartCounter = document.getElementById("cart-counter");
+      // Fallback selector just in case you are using the default Dawn header classes
+      const dawnCartCounter = document.querySelector('.cart-count-bubble span[aria-hidden="true"]');
+      
+      if (cartCounter) {
+        cartCounter.innerText = cartData.item_count;
+      } else if (dawnCartCounter) {
+        dawnCartCounter.innerText = cartData.item_count;
+      }
+      const parsedData = await response.json()
+      submitButton.innerText = "Added successfully"
+      submitButton.style.backgroundColor = "#4CAF50"
+      submitButton.style.opacity = "1"
+
+      setTimeout(() => {
+        submitButton.innerText = originalText
+        submitButton.style.backgroundColor = 'var(--brand-primary)'
+      }, 2000);
+
+    } catch (error) {
+      console.log("Error while adding to cart", error)
+      submitButton.innerText = "Error-Try Again"
+      submitButton.style.backgroundColor = "red"
+      submitButton.style.opacity = "1"
+
+      setTimeout(() => {
+        submitButton.innerText = originalText
+        submitButton.style.backgroundColor = 'var(--brand-primary)'
+      }, 2000);
+    }
+
+  })
+</script>

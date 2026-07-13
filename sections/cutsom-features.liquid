@@ -1,0 +1,101 @@
+{%style%}
+    .features-section {
+        padding: 60px 20px;
+        background-color: #ffffff;
+    }
+    .features-heading {
+        text-align: center;
+        margin-bottom: 40px;
+        font-family: sans-serif;
+    }
+    .features-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    .feature-card {
+        flex: 1;
+        min-width: 250px;
+        padding: 30px;
+        background-color: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        text-align: center;
+    }
+    .feature-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #111827;
+    }
+    .feature-text {
+        font-size: 16px;
+        color: #4b5563;
+        line-height: 1.5;
+    }
+{%endstyle%}
+<div class="container features-section">
+    <h2 class="features-heading">
+        {{section.settings.main_heading}}
+    </h2>
+    <div class="features-grid">
+        {%for block in section.blocks%}
+        <div class="feature-card"   {{block.shopify_attributes}}>
+            <h3 class="feature-title">
+                {{block.settings.column_title}}
+            </h3>
+            <p class="feature-text" >{{block.settings.column_text}}</p>
+          
+        </div>
+        {%endfor%}
+
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Custom Features Grid",
+    "max_blocks": 4,
+    "settings": [
+        {
+            "type": "text",
+            "id": "main_heading",
+            "label": "Section Heading",
+            "default": "Why Choose Us"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "feature_column",
+            "name": "Feature Column",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "column_title",
+                    "label": "Column Title",
+                    "default": "Great Feature"
+                },
+                {
+                    "type": "textarea",
+                    "id": "column_text",
+                    "label": "Column Text",
+                    "default": "Explain why this feature is awesome."
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Custom Features Grid",
+            "blocks": [
+                { "type": "feature_column" },
+                { "type": "feature_column" },
+                { "type": "feature_column" }
+            ]
+        }
+    ]
+}
+{% endschema %}

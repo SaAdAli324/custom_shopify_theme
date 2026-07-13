@@ -1452,4 +1452,16 @@
       }
     ]
   }
+  ,
+  {
+    "name": "Custom Brand Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "primary_brand_color",
+        "label": "Primary Brand Color",
+        "default": "#000000"
+      }
+    ]
+  }
 ]
